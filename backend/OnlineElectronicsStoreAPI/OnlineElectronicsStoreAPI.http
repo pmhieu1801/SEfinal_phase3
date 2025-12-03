@@ -1,0 +1,6 @@
+@OnlineElectronicsStoreAPI_HostAddress = http://localhost:5037
+
+GET {{OnlineElectronicsStoreAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

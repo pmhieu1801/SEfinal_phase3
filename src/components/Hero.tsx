@@ -1,19 +1,34 @@
+import { useEffect, useState } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight } from 'lucide-react';
+import { productsApi } from '../services/api';
 
 interface HeroProps {
   onShopNow: () => void;
   onViewDeals: () => void;
-  productCount: number;
 }
 
-export function Hero({ onShopNow, onViewDeals, productCount }: HeroProps) {
+export function Hero({ onShopNow, onViewDeals }: HeroProps) {
+  const [productCount, setProductCount] = useState(0);
+
+  useEffect(() => {
+    const fetchProductCount = async () => {
+      try {
+        const products = await productsApi.getAll();
+        setProductCount(products.length);
+      } catch (error) {
+        console.error('Failed to fetch products:', error);
+      }
+    };
+    fetchProductCount();
+  }, []);
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
       <div className="container mx-auto px-4 py-16 md:py-24">
         <div className="grid gap-8 md:grid-cols-2 items-center">
           <div className="space-y-6">
-            <div className="inline-block rounded-full bg-blue-100 px-4 py-1.5 text-sm text-blue-700">
+            <div className="inline-block rounded-full bg-blue-100 px-4 py-1. 5 text-sm text-blue-700">
               ⚡ New Arrivals 2025
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl">
@@ -24,7 +39,7 @@ export function Hero({ onShopNow, onViewDeals, productCount }: HeroProps) {
               </span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-md">
-              Discover the newest electronics and gadgets. Free shipping on orders over $50. Shop with confidence.
+              Discover the newest electronics and gadgets. Free shipping on orders over $50. Shop with confidence. 
             </p>
             <div className="flex flex-wrap gap-3">
               <Button size="lg" className="gap-2" onClick={onShopNow}>
