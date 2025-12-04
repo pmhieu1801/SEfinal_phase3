@@ -3221,32 +3221,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\phamm\\.nuget\\packages\\": {},
-    "D:\\New folder\\shared\\NuGetPackages": {}
+    "/home/runner/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SE_phase3\\backend\\OnlineElectronicsStoreAPI\\OnlineElectronicsStoreAPI.csproj",
+      "projectUniqueName": "/home/runner/work/SEfinal_phase3/SEfinal_phase3/backend/OnlineElectronicsStoreAPI/OnlineElectronicsStoreAPI.csproj",
       "projectName": "OnlineElectronicsStoreAPI",
-      "projectPath": "D:\\SE_phase3\\backend\\OnlineElectronicsStoreAPI\\OnlineElectronicsStoreAPI.csproj",
-      "packagesPath": "C:\\Users\\phamm\\.nuget\\packages\\",
-      "outputPath": "D:\\SE_phase3\\backend\\OnlineElectronicsStoreAPI\\obj\\",
+      "projectPath": "/home/runner/work/SEfinal_phase3/SEfinal_phase3/backend/OnlineElectronicsStoreAPI/OnlineElectronicsStoreAPI.csproj",
+      "packagesPath": "/home/runner/.nuget/packages/",
+      "outputPath": "/home/runner/work/SEfinal_phase3/SEfinal_phase3/backend/OnlineElectronicsStoreAPI/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "D:\\New folder\\shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\phamm\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/runner/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3265,7 +3257,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -3309,7 +3301,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

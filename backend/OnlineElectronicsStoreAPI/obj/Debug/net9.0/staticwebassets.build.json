@@ -1,12 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "6ARgB0z1NPYXYfQdtR4C45PmRW4Qki2rtXnP3SljhkE=",
-  "Source": "OnlineElectronicsStoreAPI",
-  "BasePath": "_content/OnlineElectronicsStoreAPI",
-  "Mode": "Default",
-  "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
-}
+{"Version":1,"Hash":"Sp6Mjb+3rwcvewjayVkFCR58EAv02bOQa9Jyv+cgn+Q=","Source":"OnlineElectronicsStoreAPI","BasePath":"/","Mode":"Root","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
