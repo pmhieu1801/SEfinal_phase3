@@ -13,6 +13,7 @@ import { CheckoutPage, OrderData } from './components/CheckoutPage';
 import { OrderConfirmationPage } from './components/OrderConfirmationPage';
 import { products as initialProducts } from './data/products';
 import { Product, CartItem, Order } from './types/product';
+import { productsApi } from './services/api';
 import { Toaster } from './components/ui/sonner';
 import { toast } from 'sonner@2.0.3';
 
@@ -35,11 +36,49 @@ export default function App() {
   const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('light');
   const [language, setLanguage] = useState('en');
   
-  // Initialize products with stock quantities
-  const [products, setProducts] = useState<Product[]>(
-    initialProducts.map(p => ({ ...p, stockQuantity: p.stockQuantity || 50 }))
-  );
+  // Initialize products with empty array (will be fetched from API)
+  const [products, setProducts] = useState<Product[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
+
+  // Fetch products from API on mount
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const apiProducts = await productsApi.getAll();
+        
+        // Map API Product format to UI Product format
+        const mappedProducts: Product[] = apiProducts.map(p => ({
+          id: String(p.id),
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice || undefined,
+          category: p.category,
+          image: p.imageUrl,
+          rating: p.rating || 0,
+          reviews: p.reviewCount || 0,
+          inStock: p.stock > 0,
+          badge: p.originalPrice && p.originalPrice > p.price ? 'Sale' : p.isFeatured ? 'Featured' : undefined,
+          description: p.description || '',
+          specs: [],
+          stockQuantity: p.stock
+        }));
+        
+        setProducts(mappedProducts);
+        if (import.meta.env.DEV) {
+          console.log(`Loaded ${mappedProducts.length} products from API`);
+        }
+      } catch (error) {
+        if (import.meta.env.DEV) {
+          console.error('Failed to fetch products from API:', error);
+          console.log('Using fallback local products data');
+        }
+        // Fallback to local data if API fails
+        setProducts(initialProducts.map(p => ({ ...p, stockQuantity: p.stockQuantity || 50 })));
+      }
+    };
+    
+    fetchProducts();
+  }, []);
 
   // Check if user is staff
   const isStaff = user?.email.endsWith('@awe.staff.org.au') || false;
