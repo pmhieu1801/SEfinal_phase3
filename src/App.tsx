@@ -64,10 +64,14 @@ export default function App() {
         }));
         
         setProducts(mappedProducts);
-        console.log(`Loaded ${mappedProducts.length} products from API`);
+        if (import.meta.env.DEV) {
+          console.log(`Loaded ${mappedProducts.length} products from API`);
+        }
       } catch (error) {
-        console.error('Failed to fetch products from API:', error);
-        console.log('Using fallback local products data');
+        if (import.meta.env.DEV) {
+          console.error('Failed to fetch products from API:', error);
+          console.log('Using fallback local products data');
+        }
         // Fallback to local data if API fails
         setProducts(initialProducts.map(p => ({ ...p, stockQuantity: p.stockQuantity || 50 })));
       }
