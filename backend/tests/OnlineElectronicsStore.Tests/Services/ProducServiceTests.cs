@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Moq;
 using Xunit;
-using OnlineElectronicsStoreAPI.Models;
+using OnlineElectronicsStore.Domain.Models;
 using OnlineElectronicsStoreAPI.Repositories;
 using OnlineElectronicsStoreAPI.Services;
 

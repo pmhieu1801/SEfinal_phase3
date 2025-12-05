@@ -2,7 +2,7 @@ using Microsoft.AspNetCore. Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnlineElectronicsStoreAPI. Data;
 using OnlineElectronicsStoreAPI.DTOs;
-using OnlineElectronicsStoreAPI.Models;
+using OnlineElectronicsStore.Domain.Models;
 
 namespace OnlineElectronicsStoreAPI.Controllers;
 

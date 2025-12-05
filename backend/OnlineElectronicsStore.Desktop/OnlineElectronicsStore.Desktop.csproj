@@ -4,8 +4,8 @@
     <TargetFramework>net9.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="System.Net.Http.Json" Version="7.0.0" />
   </ItemGroup>

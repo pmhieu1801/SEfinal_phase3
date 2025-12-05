@@ -1,4 +1,4 @@
-namespace OnlineElectronicsStoreAPI.Models;
+namespace OnlineElectronicsStore.Domain.Models;
 
 public class Product
 {

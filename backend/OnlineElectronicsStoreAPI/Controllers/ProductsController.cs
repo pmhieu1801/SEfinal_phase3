@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using OnlineElectronicsStoreAPI.Models;
+using OnlineElectronicsStore.Domain.Models;
 using OnlineElectronicsStoreAPI.Services;
 
 namespace OnlineElectronicsStoreAPI.Controllers;

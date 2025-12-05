@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using OnlineElectronicsStoreAPI.Models;
+using OnlineElectronicsStore.Domain.Models;
 
-namespace OnlineElectronicsStoreAPI.Data;
+namespace OnlineElectronicsStore.DAL.Data;
 
 public class ApplicationDbContext : DbContext
 {

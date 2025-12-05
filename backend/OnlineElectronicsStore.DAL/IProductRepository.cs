@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using OnlineElectronicsStoreAPI.Models;
+using OnlineElectronicsStore.Domain.Models;
 
-namespace OnlineElectronicsStoreAPI.Repositories
+namespace OnlineElectronicsStore.DAL.Repositories
 {
     public interface IProductRepository
     {

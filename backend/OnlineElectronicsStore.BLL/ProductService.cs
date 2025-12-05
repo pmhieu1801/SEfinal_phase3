@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using OnlineElectronicsStoreAPI.Models;
-using OnlineElectronicsStoreAPI.Repositories;
+using OnlineElectronicsStore.Domain.Models;
+using OnlineElectronicsStore.DAL.Repositories;
 
-namespace OnlineElectronicsStoreAPI.Services
+namespace OnlineElectronicsStore.BLL.Services
 {
     public class ProductService : IProductService
     {

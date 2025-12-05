@@ -1,9 +1,9 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using OnlineElectronicsStoreAPI.Data;
-using OnlineElectronicsStoreAPI.Repositories;
-using OnlineElectronicsStoreAPI.Services;
+using OnlineElectronicsStore.DAL.Data;
+using OnlineElectronicsStore.DAL.Repositories;
+using OnlineElectronicsStore.BLL.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using OnlineElectronicsStoreAPI.Data;
-using OnlineElectronicsStoreAPI.Models;
+using OnlineElectronicsStore.DAL.Data;
+using OnlineElectronicsStore.Domain.Models;
 
-namespace OnlineElectronicsStoreAPI.Repositories
+namespace OnlineElectronicsStore.DAL.Repositories
 {
     public class ProductRepository : IProductRepository
     {

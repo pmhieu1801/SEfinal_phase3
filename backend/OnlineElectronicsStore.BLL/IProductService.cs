@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using OnlineElectronicsStoreAPI.Models;
+using OnlineElectronicsStore.Domain.Models;
 
-namespace OnlineElectronicsStoreAPI.Services
+namespace OnlineElectronicsStore.BLL.Services
 {
     public interface IProductService
     {
