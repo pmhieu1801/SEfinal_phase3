@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineElectronicsStore.Domain.Models;
-using OnlineElectronicsStoreAPI.Services;
+using OnlineElectronicsStore.BLL.Services;
 
 namespace OnlineElectronicsStoreAPI.Controllers;
 
@@ -75,3 +75,4 @@ public class ProductsController : ControllerBase
         return NoContent();
     }
 }
+

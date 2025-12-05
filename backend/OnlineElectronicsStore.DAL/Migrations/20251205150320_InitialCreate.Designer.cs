@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using OnlineElectronicsStoreAPI.Data;
+using OnlineElectronicsStore.DAL.Data;
 
 #nullable disable
 
-namespace OnlineElectronicsStoreAPI.Migrations
+namespace OnlineElectronicsStore.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20251205150320_InitialCreate")]
@@ -224,3 +224,4 @@ namespace OnlineElectronicsStoreAPI.Migrations
         }
     }
 }
+

@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using OnlineElectronicsStoreAPI.Data;
+using OnlineElectronicsStore.DAL.Data;
 
 #nullable disable
 
-namespace OnlineElectronicsStoreAPI.Migrations
+namespace OnlineElectronicsStore.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -221,3 +221,4 @@ namespace OnlineElectronicsStoreAPI.Migrations
         }
     }
 }
+
