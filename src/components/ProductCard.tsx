@@ -22,11 +22,11 @@ interface ProductCardProps {
 export function ProductCard({ product, onAddToCart, onProductClick }: ProductCardProps) {
   // Map API fields to UI fields
   const displayProduct = {
-    ... product,
-    image: product. imageUrl,
-    reviews: product.reviewCount,
-    inStock: product.stock > 0,
-  };
+  ...product,
+  image: product.image || '',  // ← ĐÚNG! Giữ nguyên product.image
+  reviews: product.reviews || 0,  // ← Sửa từ reviewCount → reviews
+  inStock: product. inStock,  // ← Sửa từ product.stock > 0 → product.inStock
+};
 
   return (
     <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300">
@@ -34,11 +34,11 @@ export function ProductCard({ product, onAddToCart, onProductClick }: ProductCar
         className="relative aspect-square overflow-hidden bg-gray-100 cursor-pointer"
         onClick={() => onProductClick(displayProduct)}
       >
-        <img
-          src={displayProduct. image}
-          alt={displayProduct.name}
-          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-        />
+      <img
+  src={displayProduct.image}  // ← Line 38
+  alt={displayProduct.name}
+  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+/>
         {displayProduct.isFeatured && (
           <Badge className="absolute left-3 top-3" variant="default">
             Featured

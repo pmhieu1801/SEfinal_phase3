@@ -46,31 +46,40 @@ export default function App() {
       try {
         const apiProducts = await productsApi.getAll();
         
+        console.log('🔍 API Response:', apiProducts. length, 'products');
+        console.log('🔍 First API product:', apiProducts[0]);
+        
         // Map API Product format to UI Product format
         const mappedProducts: Product[] = apiProducts.map(p => ({
-          id: String(p.id),
-          name: p.name,
-          price: p.price,
+          id: String(p. id),
+          name: p. name,
+          price: p. price,
           originalPrice: p.originalPrice || undefined,
           category: p.category,
-          image: p.imageUrl,
-          rating: p.rating || 0,
+          image: p.imageUrl || '',  // Map imageUrl to image field with fallback
+          rating: p. rating || 0,
           reviews: p.reviewCount || 0,
-          inStock: p.stock > 0,
-          badge: p.originalPrice && p.originalPrice > p.price ? 'Sale' : p.isFeatured ? 'Featured' : undefined,
-          description: p.description || '',
+          inStock: p. stock > 0,
+          badge: p.originalPrice && p. originalPrice > p.price ? 'Sale' : p.isFeatured ? 'Featured' : undefined,
+          description: p. description || '',
           specs: [],
-          stockQuantity: p.stock
+          stockQuantity: p. stock
         }));
         
+        console.log('✅ Mapped products:', mappedProducts. length);
+        console.log('✅ First mapped product:', mappedProducts[0]);
+        console.log('✅ First product image:', mappedProducts[0]?.image);
+        
         setProducts(mappedProducts);
-        if (import.meta.env.DEV) {
-          console.log(`Loaded ${mappedProducts.length} products from API`);
+        
+        if (import.meta. env.DEV) {
+          console.log(`✅ Loaded ${mappedProducts.length} products from API`);
         }
       } catch (error) {
+        console.error('❌ Failed to fetch products from API:', error);
+        
         if (import.meta.env.DEV) {
-          console.error('Failed to fetch products from API:', error);
-          console.log('Using fallback local products data');
+          console.log('⚠️ Using fallback local products data');
         }
         // Fallback to local data if API fails
         setProducts(initialProducts.map(p => ({ ...p, stockQuantity: p.stockQuantity || 50 })));
@@ -81,7 +90,7 @@ export default function App() {
   }, []);
 
   // Check if user is staff
-  const isStaff = user?.email.endsWith('@awe.staff.org.au') || false;
+  const isStaff = user?.email.endsWith('@awe.staff.org. au') || false;
 
   // Apply theme effect
   useEffect(() => {
@@ -128,7 +137,7 @@ export default function App() {
 
     return [
       { name: 'All Products', count: products.length, icon: '📱' },
-      ...Array.from(categoryMap.entries()).map(([name, count]) => ({
+      ...Array.from(categoryMap.entries()). map(([name, count]) => ({
         name,
         count,
         icon: getCategoryIcon(name)
@@ -142,7 +151,7 @@ export default function App() {
       if (existingItem) {
         toast.success('Quantity updated in cart');
         return prev.map((item) =>
-          item.id === product.id
+          item.id === product. id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
@@ -160,7 +169,7 @@ export default function App() {
   };
 
   const handleRemoveItem = (id: string) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
+    setCartItems((prev) => prev. filter((item) => item.id !== id));
     toast.info('Item removed from cart');
   };
 
@@ -169,7 +178,7 @@ export default function App() {
 
     // Filter by sale status first
     if (showOnlySale) {
-      filtered = filtered.filter((p) => p.badge === 'Sale');
+      filtered = filtered.filter((p) => p. badge === 'Sale');
     }
 
     // Filter by category
@@ -178,12 +187,12 @@ export default function App() {
     }
 
     // Filter by search query
-    if (searchQuery.trim()) {
+    if (searchQuery. trim()) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(
         (p) =>
           p.name.toLowerCase().includes(query) ||
-          p.description.toLowerCase().includes(query) ||
+          p.description. toLowerCase().includes(query) ||
           p.category.toLowerCase().includes(query)
       );
     }
@@ -207,17 +216,17 @@ export default function App() {
     setSearchQuery('');
     setShowOnlySale(true);
     setTimeout(() => {
-      productsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      productsRef. current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
   };
 
   const handleLogin = (userData: { email: string; name: string }) => {
     setUser(userData);
-    const isStaffUser = userData.email.endsWith('@awe.staff.org.au');
+    const isStaffUser = userData.email.endsWith('@awe.staff.org. au');
     
     if (isStaffUser) {
       setCurrentPage('admin');
-      toast.success(`Welcome back, ${userData.name}! (Staff)`);
+      toast.success(`Welcome back, ${userData.name}!  (Staff)`);
     } else {
       setCurrentPage('store');
       toast.success(`Welcome back, ${userData.name}!`);
@@ -259,7 +268,7 @@ export default function App() {
     }
     
     if (!user) {
-      toast.error('Please log in or sign up to proceed to checkout');
+      toast. error('Please log in or sign up to proceed to checkout');
       setIsCartOpen(false);
       setCurrentPage('login');
       return;
@@ -271,7 +280,7 @@ export default function App() {
 
   const handlePlaceOrder = (data: OrderData) => {
     // Generate order ID
-    const newOrderId = 'AWE-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+    const newOrderId = 'AWE-' + Math.random().toString(36).substr(2, 9). toUpperCase();
     setOrderId(newOrderId);
     setOrderData(data);
     
@@ -295,7 +304,7 @@ export default function App() {
     cartItems.forEach(item => {
       setProducts(prev => prev.map(p => 
         p.id === item.id 
-          ? { ...p, stockQuantity: Math.max(0, (p.stockQuantity || 0) - item.quantity) }
+          ? { ... p, stockQuantity: Math.max(0, (p.stockQuantity || 0) - item.quantity) }
           : p
       ));
     });
@@ -317,7 +326,7 @@ export default function App() {
 
   // Admin handlers
   const handleUpdateProduct = (updatedProduct: Product) => {
-    setProducts(prev => prev.map(p => p.id === updatedProduct.id ? updatedProduct : p));
+    setProducts(prev => prev. map(p => p.id === updatedProduct.id ? updatedProduct : p));
   };
 
   const handleDeleteProduct = (id: string) => {
@@ -329,7 +338,7 @@ export default function App() {
   };
 
   const handleUpdateOrderStatus = (orderId: string, status: Order['status']) => {
-    setOrders(prev => prev.map(o => o.id === orderId ? { ...o, status } : o));
+    setOrders(prev => prev.map(o => o.id === orderId ?  { ...o, status } : o));
   };
 
   const cartItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
