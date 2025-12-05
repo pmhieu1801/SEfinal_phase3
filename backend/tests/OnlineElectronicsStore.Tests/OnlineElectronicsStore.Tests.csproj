@@ -15,5 +15,6 @@
   <ItemGroup>
     <!-- Adjust the path if your backend project is in a different location -->
     <ProjectReference Include="../OnlineElectronicsStoreAPI/OnlineElectronicsStoreAPI.csproj" />
+    <ProjectReference Include="..\..\OnlineElectronicsStoreAPI\OnlineElectronicsStoreAPI.csproj" />
   </ItemGroup>
 </Project>

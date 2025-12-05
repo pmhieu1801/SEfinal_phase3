@@ -2,6 +2,8 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using OnlineElectronicsStoreAPI.Data;
+using OnlineElectronicsStoreAPI.Repositories;
+using OnlineElectronicsStoreAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,19 @@ else
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseInMemoryDatabase("OnlineElectronicsStoreDB"));
 }
+
+// Register repositories and services (3-tier)
+// Make sure the corresponding classes/interfaces exist under the namespaces:
+// - OnlineElectronicsStoreAPI.Repositories
+// - OnlineElectronicsStoreAPI.Services
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
+// If you implement Orders/Users repositories & services, register them here as well:
+// builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+// builder.Services.AddScoped<IOrderService, OrderService>();
+// builder.Services.AddScoped<IUserRepository, UserRepository>();
+// builder.Services.AddScoped<IUserService, UserService>();
 
 // Add CORS
 builder.Services.AddCors(options =>

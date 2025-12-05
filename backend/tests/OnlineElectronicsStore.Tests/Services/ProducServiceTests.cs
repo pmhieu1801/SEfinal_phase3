@@ -1,69 +1,47 @@
-using System.Collections.Generic;
+using System;
 using System.Threading.Tasks;
-using Xunit;
 using Moq;
-using FluentAssertions;
-
-// NOTE: Adjust these using imports and namespace to match your backend project namespace
-// using OnlineElectronicsStoreAPI.Services;
-// using OnlineElectronicsStoreAPI.Repositories;
-// using OnlineElectronicsStoreAPI.Models;
-// using OnlineElectronicsStoreAPI.DTOs;
+using Xunit;
+using OnlineElectronicsStoreAPI.Models;
+using OnlineElectronicsStoreAPI.Repositories;
+using OnlineElectronicsStoreAPI.Services;
 
 namespace OnlineElectronicsStore.Tests.Services
 {
     public class ProductServiceTests
     {
         [Fact]
-        public async Task GetAll_ReturnsProducts()
+        public async Task CreateProduct_ShouldThrow_WhenNameEmpty()
         {
-            // Arrange
-            var mockRepo = new Mock<IProductRepository>();
-            mockRepo.Setup(r => r.GetAllAsync()).ReturnsAsync(new List<Product>
-            {
-                new Product { Id = 1, Name = "Test", Price = 10M }
-            });
+            var repoMock = new Mock<IProductRepository>();
+            var service = new ProductService(repoMock.Object);
 
-            // If your ProductService requires additional dependencies (mapper etc.), pass mocks or null accordingly
-            var service = new ProductService(mockRepo.Object, null);
-
-            // Act
-            var result = await service.GetAllAsync();
-
-            // Assert
-            result.Should().NotBeNull();
-            result.Should().HaveCountGreaterOrEqualTo(1);
+            await Assert.ThrowsAsync<ArgumentException>(() => service.CreateProductAsync(new Product { Name = "", Price = 10M }));
         }
 
         [Fact]
-        public async Task CreateOrder_DecreasesStock()
+        public async Task CreateProduct_ShouldCallRepo_WhenValid()
         {
-            // Arrange
-            var product = new Product { Id = 1, Name = "Item", Stock = 5, Price = 100M };
-            var mockProductRepo = new Mock<IProductRepository>();
-            mockProductRepo.Setup(r => r.GetByIdAsync(1)).ReturnsAsync(product);
-            mockProductRepo.Setup(r => r.Update(It.IsAny<Product>()));
+            var repoMock = new Mock<IProductRepository>();
+            repoMock.Setup(r => r.FindByNameAsync(It.IsAny<string>())).ReturnsAsync((Product?)null);
+            repoMock.Setup(r => r.AddAsync(It.IsAny<Product>())).Returns(Task.CompletedTask);
 
-            var mockOrderRepo = new Mock<IOrderRepository>();
-            mockOrderRepo.Setup(r => r.AddAsync(It.IsAny<Order>()));
+            var service = new ProductService(repoMock.Object);
 
-            var orderService = new OrderService(mockOrderRepo.Object, mockProductRepo.Object /*, mapper */);
+            var p = new Product { Name = "X", Price = 10M };
+            var result = await service.CreateProductAsync(p);
 
-            // Act
-            var orderDto = new CreateOrderDto
-            {
-                Items = new List<CreateOrderItemDto> {
-                    new CreateOrderItemDto { ProductId = 1, Quantity = 2 }
-                },
-                Shipping = new ShippingDto { FullName = "Test", Address = "Addr", Email = "a@b.com" },
-                Payment = new PaymentDto { Method = "Cash" }
-            };
+            repoMock.Verify(r => r.AddAsync(p), Times.Once);
+            Assert.Equal("X", result.Name);
+        }
 
-            await orderService.PlaceOrderAsync(orderDto);
+        [Fact]
+        public async Task UpdateProduct_ShouldThrow_WhenPriceNegative()
+        {
+            var repoMock = new Mock<IProductRepository>();
+            var service = new ProductService(repoMock.Object);
 
-            // Assert: Verify product update called with decreased stock
-            mockProductRepo.Verify(r => r.Update(It.Is<Product>(p => p.Stock == 3)), Times.AtLeastOnce);
-            mockProductRepo.Verify(r => r.GetByIdAsync(1), Times.AtLeastOnce);
+            await Assert.ThrowsAsync<ArgumentException>(() => service.UpdateProductAsync(new Product { Id = 1, Name = "A", Price = -5M }));
         }
     }
 }
