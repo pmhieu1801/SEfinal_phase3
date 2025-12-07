@@ -1,4 +1,4 @@
-namespace OnlineElectronicsStoreAPI. DTOs;
+namespace OnlineElectronicsStoreAPI.DTOs;
 
 public class ProductDto
 {

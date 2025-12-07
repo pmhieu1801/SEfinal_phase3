@@ -90,7 +90,7 @@ export default function App() {
   }, []);
 
   // Check if user is staff
-  const isStaff = user?.email.endsWith('@awe.staff.org. au') || false;
+  const isStaff = user?.email.endsWith('@awe.staff.org.au') || false;
 
   // Apply theme effect
   useEffect(() => {

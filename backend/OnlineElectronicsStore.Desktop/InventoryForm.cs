@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -33,8 +34,14 @@ namespace OnlineElectronicsStore.Desktop
             _btnRefresh.Enabled = false;
             try
             {
+                // Gọi API lấy danh sách sản phẩm
                 var products = await _api.GetProductsAsync();
-                _grid.DataSource = products;
+
+                // Debug: Hiển thị số lượng sản phẩm lấy được từ API
+                MessageBox.Show("Số lượng sản phẩm lấy được từ API: " + (products?.Count ?? 0));
+
+                // Bind dữ liệu vào DataGridView
+                _grid.DataSource = new BindingList<ProductDto>(products);
             }
             catch (Exception ex)
             {

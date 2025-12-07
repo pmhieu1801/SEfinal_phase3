@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -15,7 +15,7 @@ namespace OnlineElectronicsStore.Desktop
     public class ApiClient
     {
         private readonly HttpClient _client;
-        public string BaseUrl { get; set; } = "http://localhost:5000/api";
+        public string BaseUrl { get; set; } = "http://localhost:5000/api/Auth/";
 
         public ApiClient()
         {
@@ -28,13 +28,17 @@ namespace OnlineElectronicsStore.Desktop
             try
             {
                 // Defensive: backend auth endpoint may not exist; handle errors gracefully
-                var resp = await _client.PostAsJsonAsync("/auth/login", new { email, password });
+                var resp = await _client.PostAsJsonAsync("login", new { email, password });
                 if (!resp.IsSuccessStatusCode)
                 {
                     return new LoginResult { Success = false, Error = $"Status {resp.StatusCode}" };
                 }
-                var data = await resp.Content.ReadFromJsonAsync<dynamic>();
-                string token = data?.token ?? data?.Token ?? string.Empty;
+                var data = await resp.Content.ReadFromJsonAsync<System.Text.Json.JsonElement>();
+                string token = "";
+                if (data.TryGetProperty("token", out var tokenProp))
+                {
+                    token = tokenProp.GetString() ?? "";
+                }
                 if (!string.IsNullOrEmpty(token)) _client.DefaultRequestHeaders.Authorization =
                     new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
@@ -46,16 +50,16 @@ namespace OnlineElectronicsStore.Desktop
             }
         }
 
-        public async Task<dynamic[]> GetProductsAsync()
+        public async Task<List<ProductDto>> GetProductsAsync()
         {
             try
             {
-                var resp = await _client.GetFromJsonAsync<dynamic[]>("/products");
-                return resp;
+                var resp = await _client.GetFromJsonAsync<List<ProductDto>>("/api/Products"); // hoặc "/api/products" nếu route backend
+                return resp ?? new List<ProductDto>();
             }
             catch
             {
-                return Array.Empty<dynamic>();
+                return new List<ProductDto>();
             }
         }
     }

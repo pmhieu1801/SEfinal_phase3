@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineElectronicsStore.Doma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineElectronicsStoreAPI", "OnlineElectronicsStoreAPI\OnlineElectronicsStoreAPI.csproj", "{00030849-4AE5-40EC-AC25-F9A7340329B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineElectronicsStore.Desktop", "OnlineElectronicsStore.Desktop\OnlineElectronicsStore.Desktop.csproj", "{3480829C-79A7-5F5F-1171-62821AFC0299}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{00030849-4AE5-40EC-AC25-F9A7340329B3}.Release|x64.Build.0 = Release|Any CPU
 		{00030849-4AE5-40EC-AC25-F9A7340329B3}.Release|x86.ActiveCfg = Release|Any CPU
 		{00030849-4AE5-40EC-AC25-F9A7340329B3}.Release|x86.Build.0 = Release|Any CPU
+		{3480829C-79A7-5F5F-1171-62821AFC0299}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3480829C-79A7-5F5F-1171-62821AFC0299}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3480829C-79A7-5F5F-1171-62821AFC0299}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3480829C-79A7-5F5F-1171-62821AFC0299}.Debug|x64.Build.0 = Debug|Any CPU
+		{3480829C-79A7-5F5F-1171-62821AFC0299}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3480829C-79A7-5F5F-1171-62821AFC0299}.Debug|x86.Build.0 = Debug|Any CPU
+		{3480829C-79A7-5F5F-1171-62821AFC0299}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3480829C-79A7-5F5F-1171-62821AFC0299}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3480829C-79A7-5F5F-1171-62821AFC0299}.Release|x64.ActiveCfg = Release|Any CPU
+		{3480829C-79A7-5F5F-1171-62821AFC0299}.Release|x64.Build.0 = Release|Any CPU
+		{3480829C-79A7-5F5F-1171-62821AFC0299}.Release|x86.ActiveCfg = Release|Any CPU
+		{3480829C-79A7-5F5F-1171-62821AFC0299}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
