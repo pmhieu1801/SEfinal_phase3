@@ -1,118 +1,80 @@
-# Online Electronics Store - Backend API
+# Backend – AWE Electronics Store
 
-## 🚀 Tech Stack
-- ASP.NET Core 8.0 Web API
-- Entity Framework Core (InMemory Database)
-- Swagger/OpenAPI
-- C# 12
+This README describes the backend of the AWE Electronics Store system.
 
-## 📋 Prerequisites
-- Visual Studio 2022 (Community, Professional, or Enterprise)
-- . NET 8.0 SDK
-- Git
+## Technologies
 
-## 🛠️ Setup Instructions
+- ASP.NET Core Web API (.NET **9.0**)
+- InMemory Db (dev) / SQL Server (optional)
+- C# (DAL, BLL, Domain)
+- Swagger UI for API testing
+- Desktop client (WinForms)
 
-### 1. Open in Visual Studio 2022
-1. Open Visual Studio 2022
-2. Click **File > Open > Project/Solution**
-3. Navigate to `backend/OnlineElectronicsStoreAPI/OnlineElectronicsStoreAPI.csproj`
-4. Click **Open**
+## Structure
 
-### 2.  Restore NuGet Packages
-Visual Studio will automatically restore packages.  If not:
-- Right-click on Solution in Solution Explorer
-- Click **Restore NuGet Packages**
+- **OnlineElectronicsStoreAPI**: Main API project
+- **OnlineElectronicsStore.Desktop**: Desktop management app
+- **OnlineElectronicsStore.Domain/BLL/DAL**: Layered architecture
+- **tests**: Backend tests
 
-### 3. Run the API
-- Press **F5** or click **Run** button
-- Browser will open automatically to Swagger UI
-- Default URL: `https://localhost:7001/swagger` or `http://localhost:5000/swagger`
+## Getting Started
 
-## 📡 API Endpoints
+### Prerequisites
 
-### Products
-- `GET /api/products` - Get all products
-- `GET /api/products/{id}` - Get product by ID
-- `POST /api/products` - Create product (Admin)
-- `PUT /api/products/{id}` - Update product (Admin)
-- `DELETE /api/products/{id}` - Delete product (Admin)
-- `GET /api/products/category/{category}` - Filter by category
+- [.NET **9.0 SDK**](https://dotnet.microsoft.com/download/dotnet/9.0)
+- Visual Studio 2022+ (recommended)
 
-### Orders
-- `GET /api/orders` - Get all orders
-- `GET /api/orders/{id}` - Get order by ID
-- `POST /api/orders` - Create new order
-- `PUT /api/orders/{id}/status` - Update order status
-- `GET /api/orders/user/{userId}` - Get user orders
+### Running the API
 
-### Users
-- `POST /api/users/register` - Register new user
-- `POST /api/users/login` - Login
-- `GET /api/users/{id}` - Get user profile
-
-## 🔧 Configuration
+1. Open `OnlineElectronicsStoreAPI.sln` in Visual Studio.
+2. Run (F5) to start the backend server.
+3. Swagger UI available at: `http://localhost:5000/swagger`
 
 ### CORS
+
 Frontend React app is allowed from:
-- `http://localhost:5173` (Vite default)
-- `http://localhost:3000` (Create React App default)
+- `http://localhost:5173` (Vite)
+- `http://localhost:3000` (CRA)
 
 ### Database
-Using **InMemory Database** for development.  Data resets on restart.
 
-To switch to SQL Server later, update `Program.cs`:
-```csharp
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-```
+- **InMemory Database** is used for rapid development. Data resets on restart.
+- To use SQL Server, change in `Program.cs`:
+  ```csharp
+  builder.Services.AddDbContext<ApplicationDbContext>(options =>
+      options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+  ```
 
-## 🧪 Testing with Swagger
-1. Run the API (F5)
-2. Open Swagger UI in browser
-3.  Expand any endpoint
-4. Click **Try it out**
-5. Fill in parameters
-6. Click **Execute**
-7. See response below
+### API Endpoints
 
-## 🔗 Connect Frontend
-Update your React app's API base URL:
+- Product operations
+- Order management
+- User authentication (JWT)
+- Staff/admin functions
 
-```typescript
-// In your React app
-const API_BASE_URL = "http://localhost:5000/api";
+## API Documentation
 
-// Example: Fetch products
-const response = await fetch(`${API_BASE_URL}/products`);
-const products = await response.json();
-```
+- Test endpoints via Swagger at `/swagger`
+- Sample API call from frontend:
+  ```typescript
+  const API_BASE_URL = "http://localhost:5000/api";
+  const response = await fetch(`${API_BASE_URL}/products`);
+  const products = await response.json();
+  ```
 
-## 📦 Project Structure
-```
-backend/
-└── OnlineElectronicsStoreAPI/
-    ├── Controllers/          # API Controllers
-    ├── Models/              # Database models
-    ├── DTOs/                # Data Transfer Objects
-    ├── Data/                # DbContext
-    ├── Services/            # Business logic
-    ├── Program.cs           # App configuration
-    └── appsettings.json     # Configuration
-```
+## Desktop Client
 
-## 🐛 Troubleshooting
+- Open `OnlineElectronicsStore.Desktop` in Visual Studio.
+- Windows Forms app for product management, inventory, orders.
 
-### Port already in use
-Edit `Properties/launchSettings.json` and change port numbers. 
+## Migrations
 
-### CORS errors
-Make sure frontend URL is added to CORS policy in `Program.cs`. 
+See [`DB_MIGRATION.md`](DB_MIGRATION.md) for migration details and manual steps.
 
-### Swagger not showing
-Check that you're accessing `/swagger` endpoint, not root `/`.
+## Contributing
 
-## 📚 Learn More
-- [ASP.NET Core Documentation](https://docs.microsoft.com/aspnet/core)
-- [Swagger/OpenAPI](https://swagger.io/specification/)
-- [Entity Framework Core](https://docs.microsoft.com/ef/core)
+Backend contributions are welcome! Follow standard .NET and C# best practices.
+
+## License
+
+See main project license.
